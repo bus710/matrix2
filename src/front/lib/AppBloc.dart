@@ -26,17 +26,17 @@ class AppBLoC {
 
   // constructor
   AppBLoC() {
-    // Connecting the event and the handler.
+    // Connect the event and the handler.
     _appEventController.stream.listen(_handler);
 
     // Init the socket and its handlers.
     socketInit();
   }
 
-  /* connecting method between
-  - the event of button click
-  - the stream for the text.
-  This is the place to make some action. */
+  /* This handler connects these: 
+  - The event of button/slider control
+  - The websocket.
+  - So this is the place to make some action (i.e. marshaling). */
   _handler(AppEvent event) {
     // print("event - " + event.type.toString());
     if (_webSocket != null && _webSocket.readyState == html.WebSocket.OPEN) {
