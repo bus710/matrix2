@@ -129,8 +129,8 @@ class _AppPageState extends State<AppPage> {
         child: Center(
           child: Column(children: <Widget>[
             _sliderAndValue('R', 150, rSliderValue),
-            _sliderAndValue('G', 150, rSliderValue),
-            _sliderAndValue('B', 150, rSliderValue),
+            _sliderAndValue('G', 150, gSliderValue),
+            _sliderAndValue('B', 150, bSliderValue),
             _buttons(),
           ]),
         ),
@@ -197,7 +197,7 @@ class _AppPageState extends State<AppPage> {
         children: <Widget>[
           _mutualButton('All', 100, Theme.of(context).accentColor),
           _mutualButton('None', 100, Theme.of(context).accentColor),
-          _mutualButton('Apply', 100, Colors.green),
+          _mutualButton('', 50, Colors.red),
         ],
       ),
     );
