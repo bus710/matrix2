@@ -28,6 +28,8 @@ class _AppPageState extends State<AppPage> {
   int bSliderValue;
 
   _AppPageState() {
+    controlStream = new StreamController();
+
     activeList = new List<bool>(64);
     for (int i = 0; i < activeList.length; i++) {
       activeList[i] = false;
@@ -54,7 +56,7 @@ class _AppPageState extends State<AppPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(centerTitle: true, title: Text(widget.title)),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +64,7 @@ class _AppPageState extends State<AppPage> {
               // _getText(),
               // _getButton(),
               // _getSwitch(),
-              _getMatrix(),
+              _getDisplay(),
               _getController(),
             ]),
       ),
@@ -75,17 +77,26 @@ class _AppPageState extends State<AppPage> {
     // _bloc.dispose();
   }
 
-  Container _getMatrix() {
+  Container _getDisplay() {
     return Container(
-      height: 350,
-      width: 350,
-      child: GridView.count(
-        crossAxisCount: 8,
-        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 3),
-        children: List.generate(64, (index) {
-          return _getPoint(index);
-        }),
-      ),
+      child: StreamBuilder(
+          stream: controlStream.stream,
+          initialData: 'Empty',
+          builder: (context, snapshot) {
+            // String data = snapshot.data.toString();
+
+            return Container(
+              height: 350,
+              width: 350,
+              child: GridView.count(
+                crossAxisCount: 8,
+                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 3),
+                children: List.generate(64, (index) {
+                  return _getPoint(index);
+                }),
+              ),
+            );
+          }),
     );
   }
 
@@ -128,7 +139,7 @@ class _AppPageState extends State<AppPage> {
   Container _getController() {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.all(5),
+        padding: const EdgeInsets.only(left: 5, top: 20, right: 5, bottom: 10),
         child: Center(
           child: Column(children: <Widget>[
             _sliderAndValue('R', 150, rSliderValue),
