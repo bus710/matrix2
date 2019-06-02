@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_web/material.dart';
 import 'package:flutter_web/widgets.dart';
 // import 'package:front/bloc.dart';
@@ -16,6 +18,7 @@ class AppPage extends StatefulWidget {
 
 class _AppPageState extends State<AppPage> {
   // final _bloc = AppBLoC();
+  StreamController<String> controlStream;
   bool switchValue = false;
   List<bool> activeList; // to check enabled/disabled
   List<String> rgbList; // to store each point's color
@@ -97,7 +100,7 @@ class _AppPageState extends State<AppPage> {
             } else {
               activeList[number] = true;
             }
-            // widget.controlStream.sink.add('Empty');
+            controlStream.sink.add('Empty');
             print('$number - ' + activeList[number].toString());
           });
         },
@@ -183,8 +186,8 @@ class _AppPageState extends State<AppPage> {
           break;
       }
       print('sliderValue:$rSliderValue,$gSliderValue,$bSliderValue');
-      // widget.controlStream.sink
-      // .add('sliderValue:$rSliderValue,$gSliderValue,$bSliderValue');
+      controlStream.sink
+          .add('sliderValue:$rSliderValue,$gSliderValue,$bSliderValue');
     });
   }
 
@@ -217,7 +220,7 @@ class _AppPageState extends State<AppPage> {
           onPressed: () => setState(() {
                 // print('$name');
                 print('outgoing data: ' + name);
-                // widget.controlStream.sink.add(name);
+                controlStream.sink.add(name);
               }),
           child: Text(name, style: TextStyle(fontSize: 20)),
           textColor: Colors.white,
