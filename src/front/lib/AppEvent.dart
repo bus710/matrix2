@@ -1,9 +1,9 @@
 abstract class AppEvent {
-  bool type;
+  String type;
 }
 
 class SwitchEvent extends AppEvent {
-  bool type;
+  String type;
 
   SwitchEvent(type){
     this.type = type;

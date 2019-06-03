@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_web/material.dart';
 import 'package:flutter_web/widgets.dart';
-// import 'package:front/bloc.dart';
-// import 'package:front/event.dart';
+import 'package:front/AppBloc.dart';
+import 'package:front/AppEvent.dart';
 
 /* About the fonts
 - https://github.com/flutter/flutter_web/tree/master/examples/gallery/web/assets
@@ -23,7 +23,7 @@ class AppPage extends StatefulWidget {
 }
 
 class _AppPageState extends State<AppPage> {
-  // final _bloc = AppBLoC();
+  final _bloc = AppBLoC();
   StreamController<String> controlStream;
   bool switchValue = false;
   List<bool> activeList; // to check enabled/disabled
@@ -62,14 +62,14 @@ class _AppPageState extends State<AppPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text(widget.title)),
+      appBar: AppBar(
+          centerTitle: true,
+          title: Text(widget.title,
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold))),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // _getText(),
-              // _getButton(),
-              // _getSwitch(),
               _getDisplay(),
               _getController(),
             ]),
@@ -80,7 +80,7 @@ class _AppPageState extends State<AppPage> {
   @override
   dispose() {
     super.dispose();
-    // _bloc.dispose();
+    _bloc.dispose();
   }
 
   Container _getDisplay() {
@@ -108,6 +108,9 @@ class _AppPageState extends State<AppPage> {
 
   void _setColor(String data) {
     switch (data) {
+      case 'Empty':
+        {/* Do nothing */}
+        break;
       case 'All':
         {
           for (int i = 0; i < activeList.length; i++) {
@@ -124,12 +127,8 @@ class _AppPageState extends State<AppPage> {
         break;
       case 'Apply':
         {
-          // apply();
-          // _bloc.app_event_sink.add(SwitchEvent(false));
+          _bloc.app_event_sink.add(SwitchEvent("Apply"));
         }
-        break;
-      case 'Empty':
-        {/* Do nothing */}
         break;
       default:
         {
@@ -274,7 +273,6 @@ class _AppPageState extends State<AppPage> {
         height: 40,
         child: RaisedButton(
           onPressed: () => setState(() {
-                // print('$name');
                 print('outgoing data: ' + name);
                 controlStream.sink.add(name);
               }),
