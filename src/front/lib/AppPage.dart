@@ -174,7 +174,6 @@ class _AppPageState extends State<AppPage> {
           padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 3),
           width: 1,
           height: 1,
-          // color: Colors.black,
         ),
       ),
     );
