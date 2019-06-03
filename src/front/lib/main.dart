@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Matrix 2',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'OpenSans'
       ),
       home: AppPage(title: 'Matrix 2'),
     );

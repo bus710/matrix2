@@ -83,7 +83,7 @@ class _AppPageState extends State<AppPage> {
           stream: controlStream.stream,
           initialData: 'Empty',
           builder: (context, snapshot) {
-            // String data = snapshot.data.toString();
+            _setColor(snapshot.data.toString());
 
             return Container(
               height: 350,
@@ -98,6 +98,45 @@ class _AppPageState extends State<AppPage> {
             );
           }),
     );
+  }
+
+  void _setColor(String data) {
+    switch (data) {
+      case 'All':
+        {
+          for (int i = 0; i < activeList.length; i++) {
+            activeList[i] = true;
+          }
+        }
+        break;
+      case 'None':
+        {
+          for (int i = 0; i < activeList.length; i++) {
+            activeList[i] = false;
+          }
+        }
+        break;
+      case 'Apply':
+        {
+          // apply();
+          // _bloc.app_event_sink.add(SwitchEvent(false));
+        }
+        break;
+      case 'Empty':
+        {/* Do nothing */}
+        break;
+      default:
+        {
+          List<String> tmp = data.split(":");
+          rgbList = tmp[1].split(",");
+
+          for (int i = 0; i < 64; i++) {
+            if (activeList[i]) {
+              colorList[i] = rgbList;
+            }
+          }
+        }
+    }
   }
 
   CustomPaint _getPoint(int number) {
@@ -211,7 +250,7 @@ class _AppPageState extends State<AppPage> {
         children: <Widget>[
           _mutualButton('All', 100, Theme.of(context).accentColor),
           _mutualButton('None', 100, Theme.of(context).accentColor),
-          _mutualButton('', 50, Colors.red),
+          _mutualButton('Apply', 50, Colors.red),
         ],
       ),
     );
@@ -233,7 +272,7 @@ class _AppPageState extends State<AppPage> {
                 print('outgoing data: ' + name);
                 controlStream.sink.add(name);
               }),
-          child: Text(name, style: TextStyle(fontSize: 20)),
+          child: _conditionalTextOrIcon(name),
           textColor: Colors.white,
           splashColor: Colors.white,
           color: color,
@@ -241,6 +280,15 @@ class _AppPageState extends State<AppPage> {
         ),
       ),
     );
+  }
+
+  Widget _conditionalTextOrIcon(String name) {
+    // https://github.com/flutter/flutter_web/tree/master/examples/gallery/web/assets
+    if (name != "Apply") {
+      return Text(name, style: TextStyle(fontSize: 20));
+    } else {
+      return new Icon(Icons.send);
+    }
   }
 
   // _getText() {
@@ -275,7 +323,6 @@ class _AppPageState extends State<AppPage> {
   //           value: switchValue,
   //           onChanged: (bool v) {
   //             print("changed - " + switchValue.toString() + "/" + v.toString());
-  //             _bloc.app_event_sink.add(SwitchEvent(switchValue));
   //           },
   //         );
   //       });
