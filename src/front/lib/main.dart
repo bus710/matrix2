@@ -8,13 +8,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Matrix 2',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'OpenSans'
-      ),
-      home: AppPage(title: 'Matrix 2'),
-    );
+        title: 'Matrix 2',
+        theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'OpenSans'),
+        home: AppPage(title: 'Matrix 2'),
+        debugShowCheckedModeBanner: false);
   }
 }
-

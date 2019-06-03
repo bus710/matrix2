@@ -5,6 +5,12 @@ import 'package:flutter_web/widgets.dart';
 // import 'package:front/bloc.dart';
 // import 'package:front/event.dart';
 
+/* About the fonts
+- https://github.com/flutter/flutter_web/tree/master/examples/gallery/web/assets
+- edit the FontManifest.json in /web/assets
+- add fonts to /web/assets/fonts
+- edit ThemeData of the MaterialApp widget */
+
 import 'package:front/AppUtil.dart';
 
 class AppPage extends StatefulWidget {
@@ -283,48 +289,10 @@ class _AppPageState extends State<AppPage> {
   }
 
   Widget _conditionalTextOrIcon(String name) {
-    // https://github.com/flutter/flutter_web/tree/master/examples/gallery/web/assets
     if (name != "Apply") {
       return Text(name, style: TextStyle(fontSize: 20));
     } else {
       return new Icon(Icons.send);
     }
   }
-
-  // _getText() {
-  //   return StreamBuilder(
-  //     stream: _bloc.stream_app,
-  //     initialData: false,
-  //     builder: (context, snapshot){
-  //       return Center(
-  //         child: Text(snapshot.data.toString()),
-  //       );
-  //     },);
-  // }
-
-  // _getButton() {
-  //   return RaisedButton(
-  //     child: Text("Flip"),
-  //     onPressed: () {
-  //       print("flip");
-  //       _bloc.app_event_sink.add(SwitchEvent(false));
-  //     }
-  //   );
-  // }
-
-  // _getSwitch() {
-  //   return StreamBuilder(
-  //       stream: _bloc.stream_app,
-  //       initialData: switchValue,
-  //       builder: (context, snapshot) {
-  //         print("snapshot - " + snapshot.data.toString());
-  //         switchValue = snapshot.data;
-  //         return Switch(
-  //           value: switchValue,
-  //           onChanged: (bool v) {
-  //             print("changed - " + switchValue.toString() + "/" + v.toString());
-  //           },
-  //         );
-  //       });
-  // }
 }

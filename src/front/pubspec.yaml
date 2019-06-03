@@ -25,7 +25,7 @@ dependency_overrides:
       url: https://github.com/flutter/flutter_web
       path: packages/flutter_web_ui
 
-fonts:
-  - family: OpenSans
-    fonts:
-      - asset: web/assets/fonts/OpenSans-Regular.ttf
+# fonts:
+#   - family: OpenSans
+#     fonts:
+#       - asset: web/assets/fonts/OpenSans-Regular.ttf
