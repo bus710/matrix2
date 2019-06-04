@@ -8,4 +8,5 @@ require (
 	github.com/tidwall/match v1.0.1 // indirect
 	github.com/tidwall/pretty v0.0.0-20190325153808-1166b9ac2b65 // indirect
 	golang.org/x/net v0.0.0-20190522155817-f3200d17e092
+	periph.io/x/periph v3.4.0+incompatible
 )

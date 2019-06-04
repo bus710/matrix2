@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"runtime"
 	"strconv"
+	"strings"
 	"sync"
 
 	"golang.org/x/net/websocket"
@@ -13,7 +15,8 @@ import (
 // webServer - the main struct of this module
 type webServer struct {
 	// app-wide items
-	wait *sync.WaitGroup
+	wait     *sync.WaitGroup
+	senseHat *senseHat
 
 	// web items
 	instance *http.Server
@@ -25,10 +28,12 @@ type webServer struct {
 
 // init - initializes the data and structs
 func (wserver *webServer) init(
-	wait *sync.WaitGroup) (err error) {
+	wait *sync.WaitGroup,
+	senseHatInstance *senseHat) (err error) {
 
 	wserver.wait = wait
 	wserver.instance = &http.Server{Addr: ":3000"}
+	wserver.senseHat = senseHatInstance
 	return nil
 }
 
@@ -38,7 +43,11 @@ func (wserver *webServer) run() (err error) {
 	http.Handle("/message", websocket.Handler(wserver.socket))
 
 	// Web Contents
-	http.Handle("/", http.FileServer(http.Dir("./front/build")))
+	if strings.Contains(runtime.GOARCH, "arm") {
+		http.Handle("/", http.FileServer(http.Dir("./front/build")))
+	} else {
+		http.Handle("/", http.FileServer(http.Dir("../front/build")))
+	}
 
 	// Server up and running
 	log.Println(wserver.instance.ListenAndServe())
@@ -72,6 +81,16 @@ func (wserver *webServer) socket(wsocket *websocket.Conn) {
 				} else {
 					if len(dataList) == 64 {
 						log.Println(dataList[0][0])
+
+						for i := 0; i < 64; i++ {
+							wserver.senseHat.bufR[i] = byte(dataList[i][0])
+							wserver.senseHat.bufG[i] = byte(dataList[i][1])
+							wserver.senseHat.bufB[i] = byte(dataList[i][2])
+						}
+
+						// To notify the data is ready to the sensorHat routine
+						wserver.senseHat.chanDataReady <- true
+						// To notify the data is ready to the client
 						chanResponse <- true
 					} else {
 						chanResponse <- false

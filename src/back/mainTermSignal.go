@@ -13,8 +13,9 @@ import (
 // termSignal - the main struct of this module
 type termSignal struct {
 	// app-wide items
-	wait   *sync.WaitGroup
-	server *webServer
+	wait     *sync.WaitGroup
+	server   *webServer
+	senseHat *senseHat
 
 	// channels
 	sigterm  chan os.Signal
@@ -25,11 +26,13 @@ type termSignal struct {
 // and keeps the assigned params in its struct to access later.
 func (sig *termSignal) init(
 	wait *sync.WaitGroup,
-	serverInstance *webServer) {
+	serverInstance *webServer,
+	senseHatInstance *senseHat) {
 
 	// To assign instances to the pointers
 	sig.wait = wait
 	sig.server = serverInstance
+	sig.senseHat = senseHatInstance
 
 	//
 	sig.chanStop = make(chan bool, 1)
@@ -64,6 +67,10 @@ func (sig *termSignal) catcher() {
 func (sig *termSignal) cleanup() (err error) {
 
 	log.Println("Cleanup - started")
+
+	// To send a signal to the sensorHat's channel
+	sig.senseHat.chanStop <- true
+
 	time.Sleep(time.Microsecond * 100)
 
 	// To call the shutdown method of the webserver

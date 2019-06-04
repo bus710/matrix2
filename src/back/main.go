@@ -9,14 +9,18 @@ func main() {
 	log.Println("Hello!")
 
 	waitInstance := sync.WaitGroup{}
+	senseHatInstance := senseHat{}
 	serverInstance := webServer{}
 	signalInstance := termSignal{}
 
-	signalInstance.init(&waitInstance, &serverInstance)
-	serverInstance.init(&waitInstance)
+	senseHatInstance.init(&waitInstance)
+	serverInstance.init(&waitInstance, &senseHatInstance)
+	signalInstance.init(&waitInstance, &serverInstance, &senseHatInstance)
 
 	waitInstance.Add(1)
 	go signalInstance.catcher()
+	waitInstance.Add(1)
+	go senseHatInstance.run()
 	waitInstance.Add(1)
 	go serverInstance.run()
 
