@@ -127,7 +127,8 @@ class _AppPageState extends State<AppPage> {
         break;
       case 'Apply':
         {
-          _bloc.app_event_sink.add(SwitchEvent("Apply"));
+          _bloc.app_event_sink.add(SwitchEvent("colorList", colorList.toString()));
+          print(colorList.toString());
         }
         break;
       default:

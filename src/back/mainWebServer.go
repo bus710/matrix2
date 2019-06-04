@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 	"strconv"
@@ -60,7 +61,14 @@ func (wserver *webServer) socket(wsocket *websocket.Conn) {
 		for {
 			select {
 			case data := <-chanData:
-				log.Println(data)
+				dataList := &matrixData{}
+				log.Println("Processing routine: " + data)
+
+				if err := json.Unmarshal([]byte(data), &dataList); err != nil {
+					log.Println(err)
+				} else {
+					log.Println()
+				}
 				chanResponse <- true
 			}
 		}
@@ -87,11 +95,12 @@ func (wserver *webServer) socket(wsocket *websocket.Conn) {
 			// log.Println(err)
 			break
 		} else {
-			tmp := wserver.receivedItemWS.Type
-			log.Println("Received message:", tmp)
-			chanData <- wserver.receivedItemWS.Data
+			messageType := wserver.receivedItemWS.Type
+			messageData := wserver.receivedItemWS.Data
+			log.Println("Received message type:", messageType)
+			log.Println("Received message data:", messageData)
+			chanData <- messageData
 		}
-
 	}
 
 	log.Println("Websocket closed")
