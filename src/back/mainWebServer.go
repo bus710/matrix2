@@ -61,13 +61,17 @@ func (wserver *webServer) socket(wsocket *websocket.Conn) {
 		for {
 			select {
 			case data := <-chanData:
-				dataList := &matrixData{}
+				/* for future unmarshling
+				https://mholt.github.io/json-to-go/ */
+				var dataList matrixData
 				log.Println("Processing routine: " + data)
 
 				if err := json.Unmarshal([]byte(data), &dataList); err != nil {
 					log.Println(err)
 				} else {
-					log.Println()
+					if len(dataList) == 64 {
+						log.Println(dataList[0][0])
+					}
 				}
 				chanResponse <- true
 			}

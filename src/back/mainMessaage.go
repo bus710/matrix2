@@ -7,10 +7,4 @@ type webSocketMessage struct {
 }
 
 // Matrix data
-type matrixData struct {
-	point []pointData
-}
-
-type pointData struct {
-	pointColor []int
-}
+type matrixData [][]int
