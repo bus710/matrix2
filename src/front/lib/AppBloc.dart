@@ -40,7 +40,8 @@ class AppBLoC {
   _handler(AppEvent event) {
     print("event - " + event.type.toString());
     if (_webSocket != null && _webSocket.readyState == html.WebSocket.OPEN) {
-      // _webSocket.send(json.encode({"message": event.type.toString()}));
+      _webSocket
+          .send(json.encode({"type": event.type.toString(), "data": "true"}));
     } else {
       print('WebSocket not connected, message data not sent');
     }
@@ -66,7 +67,7 @@ class AppBLoC {
     });
 
     _webSocket.onMessage.listen((e) {
-      String data = json.decode(e.data)["message"];
+      String data = json.decode(e.data)["type"];
       print("received - " + data);
 
       if (data == "true") {

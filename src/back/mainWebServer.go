@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 	"net/http"
+	"strconv"
 	"sync"
-	"time"
 
 	"golang.org/x/net/websocket"
 )
@@ -23,71 +23,76 @@ type webServer struct {
 }
 
 // init - initializes the data and structs
-func (s *webServer) init(
+func (wserver *webServer) init(
 	wait *sync.WaitGroup) (err error) {
 
-	s.wait = wait
-	s.instance = &http.Server{Addr: ":3000"}
+	wserver.wait = wait
+	wserver.instance = &http.Server{Addr: ":3000"}
 	return nil
 }
 
 // run - delivers the static web files and serves the REST API (+ websocket)
-func (s *webServer) run() (err error) {
+func (wserver *webServer) run() (err error) {
 	// WebSocket
-	http.Handle("/message", websocket.Handler(s.socket))
+	http.Handle("/message", websocket.Handler(wserver.socket))
 
 	// Web Contents
 	http.Handle("/", http.FileServer(http.Dir("../front/build")))
 
 	// Server up and running
-	log.Println(s.instance.ListenAndServe())
+	log.Println(wserver.instance.ListenAndServe())
 
-	s.wait.Done()
+	wserver.wait.Done()
 	return nil
 }
 
 // socket - websocket handler
-func (s *webServer) socket(ws *websocket.Conn) {
-	log.Println(ws.Request().RemoteAddr)
+func (wserver *webServer) socket(wsocket *websocket.Conn) {
 
-	defer ws.Close()
+	log.Println(wsocket.Request().RemoteAddr)
+	chanData := make(chan string, 1)
+	chanResponse := make(chan bool, 1)
 
+	defer wsocket.Close()
+
+	// Processing routine
+	go func() {
+		for {
+			select {
+			case data := <-chanData:
+				log.Println(data)
+				chanResponse <- true
+			}
+		}
+	}()
+
+	// Sending routine
+	go func() {
+		for {
+			select {
+			case res := <-chanResponse:
+				wserver.responseItemWS = &webSocketMessage{
+					Type: "response", Data: strconv.FormatBool(res)}
+				websocket.JSON.Send(wsocket, wserver.responseItemWS)
+			}
+		}
+	}()
+
+	// Receiving routine
 	for {
-		s.receivedItemWS = &webSocketMessage{}
+		wserver.receivedItemWS = &webSocketMessage{}
 		// receive a message using the codec
-		if err := websocket.JSON.Receive(ws, &s.receivedItemWS); err != nil {
-			log.Println(err)
+		if err := websocket.JSON.Receive(
+			wsocket, &wserver.receivedItemWS); err != nil {
+			// log.Println(err)
 			break
-		}
-
-		tmp := s.receivedItemWS.Message
-		log.Println("Received message:", tmp)
-
-		if tmp == "true" {
-			s.responseItemWS = &webSocketMessage{"false"}
 		} else {
-			s.responseItemWS = &webSocketMessage{"true"}
+			tmp := wserver.receivedItemWS.Type
+			log.Println("Received message:", tmp)
+			chanData <- wserver.receivedItemWS.Data
 		}
-
-		// send a response
-		if err := websocket.JSON.Send(ws, s.responseItemWS); err != nil {
-			log.Println(err)
-			break
-		}
-
-		log.Println("1 - ")
-
-		time.Sleep(time.Millisecond * 3000)
-
-		s.responseItemWS = &webSocketMessage{"true"}
-
-		// send a response
-		if err := websocket.JSON.Send(ws, s.responseItemWS); err != nil {
-			log.Println(err)
-			break
-		}
-
-		log.Println("2 - ")
 
 	}
+
+	log.Println("Websocket closed")
 }
