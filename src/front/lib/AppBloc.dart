@@ -70,13 +70,13 @@ class AppBLoC {
       String data = json.decode(e.data)["data"];
       print("received - ${type} / ${data}");
 
-      if (data == "true") {
-        app_sink.add(true);
-      } else if (data == "false") {
-        app_sink.add(false);
-      } else {
-        app_sink.add(false);
-      }
+      // if (data == "true") {
+      //   app_sink.add(true);
+      // } else if (data == "false") {
+      //   app_sink.add(false);
+      // } else {
+      //   app_sink.add(false);
+      // }
     });
   }
 
