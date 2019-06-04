@@ -38,7 +38,7 @@ func (wserver *webServer) run() (err error) {
 	http.Handle("/message", websocket.Handler(wserver.socket))
 
 	// Web Contents
-	http.Handle("/", http.FileServer(http.Dir("~/front/build")))
+	http.Handle("/", http.FileServer(http.Dir("./front/build")))
 
 	// Server up and running
 	log.Println(wserver.instance.ListenAndServe())
