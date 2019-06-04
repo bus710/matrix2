@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:front/AppEvent.dart';
 
-/* Please use html.WebSocket instead of these:
+/* Please use html.WebSocket for websocket instead of these:
 - import 'package:web_socket_channel/io.dart';
 - import 'package:web_socket_channel/web_socket_channel.dart';
 The detail can be found:
@@ -66,8 +66,9 @@ class AppBLoC {
     });
 
     _webSocket.onMessage.listen((e) {
-      String data = json.decode(e.data)["type"];
-      print("received - " + data);
+      String type = json.decode(e.data)["type"];
+      String data = json.decode(e.data)["data"];
+      print("received - ${type} / ${data}");
 
       if (data == "true") {
         app_sink.add(true);

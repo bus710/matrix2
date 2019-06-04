@@ -68,12 +68,15 @@ func (wserver *webServer) socket(wsocket *websocket.Conn) {
 
 				if err := json.Unmarshal([]byte(data), &dataList); err != nil {
 					log.Println(err)
+					chanResponse <- false
 				} else {
 					if len(dataList) == 64 {
 						log.Println(dataList[0][0])
+						chanResponse <- true
+					} else {
+						chanResponse <- false
 					}
 				}
-				chanResponse <- true
 			}
 		}
 	}()
