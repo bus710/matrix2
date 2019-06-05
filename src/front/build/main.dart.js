@@ -40088,7 +40088,7 @@ i:function(a){return this.b}}
 N.ou.prototype={
 EM:function(a){var u,t
 H.a(a,"$ihT")
-P.f6("event - "+a.c)
+P.f6("send - "+a.c)
 u=this.c
 if(u!=null&&u.readyState===1){t=P.o
 u.send(C.a7.fv(P.bG(["type",a.c,"data",a.d],t,t)))}else P.f6("WebSocket not connected, message data not sent")},
