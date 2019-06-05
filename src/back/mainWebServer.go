@@ -4,9 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"runtime"
 	"strconv"
-	"strings"
 	"sync"
 
 	"golang.org/x/net/websocket"
@@ -43,11 +41,7 @@ func (wserver *webServer) run() (err error) {
 	http.Handle("/message", websocket.Handler(wserver.socket))
 
 	// Web Contents
-	if strings.Contains(runtime.GOARCH, "arm") {
-		http.Handle("/", http.FileServer(http.Dir("./front/build")))
-	} else {
-		http.Handle("/", http.FileServer(http.Dir("../front/build")))
-	}
+	http.Handle("/", http.FileServer(http.Dir("../front/build")))
 
 	// Server up and running
 	log.Println(wserver.instance.ListenAndServe())
@@ -73,7 +67,7 @@ func (wserver *webServer) socket(wsocket *websocket.Conn) {
 				/* for future unmarshling
 				https://mholt.github.io/json-to-go/ */
 				var dataList matrixData
-				log.Println("Processing routine: " + data)
+				// log.Println("Processing routine: " + data)
 
 				if err := json.Unmarshal([]byte(data), &dataList); err != nil {
 					log.Println(err)
@@ -124,7 +118,7 @@ func (wserver *webServer) socket(wsocket *websocket.Conn) {
 			messageType := wserver.receivedItemWS.Type
 			messageData := wserver.receivedItemWS.Data
 			log.Println("Received message type:", messageType)
-			log.Println("Received message data:", messageData)
+			// log.Println("Received message data:", messageData)
 			chanData <- messageData
 		}
 	}
