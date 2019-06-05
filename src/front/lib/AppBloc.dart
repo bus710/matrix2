@@ -38,7 +38,7 @@ class AppBLoC {
   - The websocket.
   - So this is the place to make some action (i.e. marshaling). */
   _handler(AppEvent event) {
-    print("event - " + event.type.toString());
+    print("send - " + event.type.toString());
     if (_webSocket != null && _webSocket.readyState == html.WebSocket.OPEN) {
       _webSocket
           .send(json.encode({"type": event.type.toString(), "data": event.data}));

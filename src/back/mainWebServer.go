@@ -74,7 +74,7 @@ func (wserver *webServer) socket(wsocket *websocket.Conn) {
 					chanResponse <- false
 				} else {
 					if len(dataList) == 64 {
-						log.Println(dataList[0][0])
+						// log.Println(dataList[0][0])
 
 						for i := 0; i < 64; i++ {
 							wserver.senseHat.bufR[i] = byte(dataList[i][0])
