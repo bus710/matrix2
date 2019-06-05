@@ -31,7 +31,7 @@ Add the user to the docker group in /etc/group
 sudo vi /etc/group
 ```
 
-Don't forget reboot
+Don't forget rebooting
 
 ```
 sudo reboot
@@ -43,6 +43,6 @@ sudo reboot
 git clone https://github.com/bus710/matrix2
 cd matrix2/src/docker
 docker build -t matrix2 .
-docker run -p 3000:3000 --device /dev/i2c-0 --device /dev/i2c-1 -it -rm --name matrix2i matrix2
+docker run -p 3000:3000 --device /dev/i2c-1 -it --rm --name matrix2i matrix2
 ```
 
