@@ -2,7 +2,13 @@
 
 ## Prerequisites
 
-- https://www.marksei.com/docker-on-raspberry-pi-raspbian/
+Enable i2c communication (in 5 - Interfacing Options)
+
+```
+sudo raspi-config
+```
+
+Get Docker 
 
 ```
 sudo apt-get install \
@@ -13,23 +19,30 @@ sudo apt-get install \
      software-properties-common \
      git
 
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+curl -sSL https://get.docker.com | sh
 
-echo "deb [arch=armhf] https://download.docker.com/linux/debian \
-     $(lsb_release -cs) stable" | \
-     sudo tee /etc/apt/sources.list.d/docker.list
+sudo systemctl enable docker
+sudo systemctl start docker
+```
 
-sudo apt-get update
-sudo apt-get install docker-ce
-systemctl enable --now docker
+Add the user to the docker group in /etc/group
+
+```
+sudo vi /etc/group
+```
+
+Don't forget reboot
+
+```
+sudo reboot
 ```
 
 ## How to run
 
 ```
 git clone https://github.com/bus710/matrix2
-cd matrix2/src/dockerARM
+cd matrix2/src/docker
 docker build -t matrix2 .
-docker run -p 3000:3000 --device /dev/i2c-0 --device /dev/i2c-1 -it -rm --name matrix2i matrix
+docker run -p 3000:3000 --device /dev/i2c-0 --device /dev/i2c-1 -it -rm --name matrix2i matrix2
 ```
 

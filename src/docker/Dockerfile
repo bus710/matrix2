@@ -1,5 +1,5 @@
 # Start from go-1.12.5
-FROM amd64/golang:1.12.5
+FROM arm32v7/golang:1.12.5
 
 # Prep
 RUN apt update
