@@ -1,0 +1,18 @@
+[
+    {
+      "family": "MaterialIcons",
+      "fonts": [
+        {
+          "asset": "fonts/MaterialIcons-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "family": "OpenSans",
+      "fonts": [
+        {
+          "asset": "fonts/OpenSans-Regular.ttf"
+        }
+      ]
+    }
+  ]

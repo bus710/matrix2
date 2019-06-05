@@ -7,6 +7,7 @@ import (
 
 func main() {
 	log.Println("Hello!")
+    log.Println("Please open the 3000 port.")
 
 	waitInstance := sync.WaitGroup{}
 	senseHatInstance := senseHat{}
