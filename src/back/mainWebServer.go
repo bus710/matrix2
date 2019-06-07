@@ -41,7 +41,9 @@ func (wserver *webServer) run() (err error) {
 	http.Handle("/message", websocket.Handler(wserver.socket))
 
 	// Web Contents
-	http.Handle("/", http.FileServer(http.Dir("../front/build")))
+    // The frontend side should be built by webdev build --output build
+    // Otherwise, the location will be ../front/build
+	http.Handle("/", http.FileServer(http.Dir("../front/build/web")))
 
 	// Server up and running
 	log.Println(wserver.instance.ListenAndServe())
