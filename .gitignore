@@ -2,6 +2,9 @@
 
 # Files and directories created by pub
 $sdk/
+src/front/build/packages/
+.dart_tool/
+
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
 
