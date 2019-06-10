@@ -35,7 +35,7 @@ class _AppPageState extends State<AppPage> {
   int bSliderValue;
 
   _AppPageState() {
-    controlStream = new StreamController();
+    controlStream = new StreamController.broadcast();
 
     activeList = new List<bool>(64);
     for (int i = 0; i < activeList.length; i++) {
@@ -68,21 +68,32 @@ class _AppPageState extends State<AppPage> {
           title: Text(widget.title,
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold))),
       body: Center(
-        child: Container(
-          margin: EdgeInsets.only(left:1, top: 30, right: 1, bottom: 30),
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey[100]),
-              borderRadius: BorderRadius.all(Radius.circular(3))),
-          child: SizedBox(
-            width: 500,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  _getDisplay(),
-                  _getController(),
-                ]),
-          ),
-        ),
+        child: LayoutBuilder(builder: (context, constraint) {
+          print(constraint.maxWidth.toString() +
+              "/" +
+              constraint.maxHeight.toString());
+          if (constraint.maxWidth < 400) {
+            return Container(
+              child: Text("Sorry, too small screen."),
+            );
+          } else {
+            return Container(
+              margin: EdgeInsets.only(left: 1, top: 30, right: 1, bottom: 30),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey[100]),
+                  borderRadius: BorderRadius.all(Radius.circular(3))),
+              child: SizedBox(
+                width: 500,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      _getDisplay(),
+                      _getController(),
+                    ]),
+              ),
+            );
+          }
+        }),
       ),
     );
   }
@@ -196,12 +207,14 @@ class _AppPageState extends State<AppPage> {
       child: Padding(
         padding: const EdgeInsets.only(left: 5, top: 20, right: 5, bottom: 10),
         child: Center(
-          child: Column(children: <Widget>[
-            _sliderAndValue('R', 150, rSliderValue),
-            _sliderAndValue('G', 150, gSliderValue),
-            _sliderAndValue('B', 150, bSliderValue),
-            _buttons(),
-          ]),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _sliderAndValue('R', 150, rSliderValue),
+                _sliderAndValue('G', 150, gSliderValue),
+                _sliderAndValue('B', 150, bSliderValue),
+                _buttons(),
+              ]),
         ),
       ),
     );
@@ -211,7 +224,7 @@ class _AppPageState extends State<AppPage> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 60),
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(name, style: TextStyle(fontSize: 18)),
