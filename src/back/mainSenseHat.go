@@ -111,7 +111,6 @@ StopFlag:
 		case <-tick:
 			// To run some task periodically
 			// log.Println("test from the sensorhat routine")
-		default:
 		}
 	}
 	sh.wait.Done()
