@@ -72,24 +72,32 @@ class _AppPageState extends State<AppPage> {
           print(constraint.maxWidth.toString() +
               "/" +
               constraint.maxHeight.toString());
-          if (constraint.maxWidth < 400) {
+          if ((constraint.maxWidth < 400) || (constraint.maxHeight < 670)) {
             return Container(
-              child: Text("Sorry, too small screen."),
+              child: Text(
+                  "Sorry, too small screen.\nWe need at least 400(w) x 670(h)."),
             );
           } else {
             return Container(
-              margin: EdgeInsets.only(left: 1, top: 30, right: 1, bottom: 30),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[100]),
-                  borderRadius: BorderRadius.all(Radius.circular(3))),
+              margin: EdgeInsets.symmetric(vertical: 3, horizontal: 1),
+              padding: EdgeInsets.symmetric(vertical: 3, horizontal: 1),
               child: SizedBox(
-                width: 500,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      _getDisplay(),
-                      _getController(),
-                    ]),
+                width: 400,
+                height: 700,
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 3, horizontal: 1),
+                  padding:
+                      EdgeInsets.only(left: 1, top: 30, right: 1, bottom: 1),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black12),
+                      borderRadius: BorderRadius.all(Radius.circular(3))),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        _getDisplay(),
+                        _getController(),
+                      ]),
+                ),
               ),
             );
           }
