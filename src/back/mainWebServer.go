@@ -41,8 +41,8 @@ func (wserver *webServer) run() (err error) {
 	http.Handle("/message", websocket.Handler(wserver.socket))
 
 	// Web Contents
-    // The frontend side should be built by webdev build --output build
-    // Otherwise, the location will be ../front/build
+	// The frontend side should be built by webdev build --output build
+	// Otherwise, the location will be ../front/build
 	http.Handle("/", http.FileServer(http.Dir("../front/build/web")))
 
 	// Server up and running
@@ -108,9 +108,9 @@ func (wserver *webServer) socket(wsocket *websocket.Conn) {
 		}
 	}()
 
+	wserver.receivedItemWS = &webSocketMessage{}
 	// Receiving routine
 	for {
-		wserver.receivedItemWS = &webSocketMessage{}
 		// receive a message using the codec
 		if err := websocket.JSON.Receive(
 			wsocket, &wserver.receivedItemWS); err != nil {
