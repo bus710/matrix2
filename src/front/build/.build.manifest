@@ -1,9 +1,4 @@
 .packages
-assets/FontManifest.json
-assets/fonts/MaterialIcons-Regular.ttf
-assets/fonts/OpenSans-Regular.ttf
-index.html
-main.dart.js
 packages/$sdk/_internal/ddc_sdk.sum
 packages/$sdk/_internal/strong.sum
 packages/$sdk/dev_compiler/amd/dart_sdk.js
@@ -282,3 +277,10 @@ packages/pedantic/analysis_options.1.5.0.yaml
 packages/pedantic/analysis_options.1.6.0.yaml
 packages/pedantic/analysis_options.1.7.0.yaml
 packages/pedantic/analysis_options.yaml
+pubspec.lock
+pubspec.yaml
+web/assets/FontManifest.json
+web/assets/fonts/MaterialIcons-Regular.ttf
+web/assets/fonts/OpenSans-Regular.ttf
+web/index.html
+web/main.dart.js
