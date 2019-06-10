@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_web/material.dart';
 import 'package:flutter_web/widgets.dart';
+
 import 'package:front/AppBloc.dart';
 import 'package:front/AppEvent.dart';
 
@@ -67,12 +68,21 @@ class _AppPageState extends State<AppPage> {
           title: Text(widget.title,
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold))),
       body: Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _getDisplay(),
-              _getController(),
-            ]),
+        child: Container(
+          margin: EdgeInsets.only(left:1, top: 30, right: 1, bottom: 30),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey[100]),
+              borderRadius: BorderRadius.all(Radius.circular(3))),
+          child: SizedBox(
+            width: 500,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  _getDisplay(),
+                  _getController(),
+                ]),
+          ),
+        ),
       ),
     );
   }
@@ -127,7 +137,8 @@ class _AppPageState extends State<AppPage> {
         break;
       case 'Apply':
         {
-          _bloc.app_event_sink.add(SwitchEvent("colorList", colorList.toString()));
+          _bloc.app_event_sink
+              .add(SwitchEvent("colorList", colorList.toString()));
           print(colorList.toString());
         }
         break;
