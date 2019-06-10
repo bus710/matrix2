@@ -83,7 +83,7 @@ class _AppPageState extends State<AppPage> {
               padding: EdgeInsets.symmetric(vertical: 3, horizontal: 1),
               child: SizedBox(
                 width: 400,
-                height: 700,
+                height: 670,
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 3, horizontal: 1),
                   padding:
