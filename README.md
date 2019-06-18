@@ -77,7 +77,7 @@ From the browser, the frontend can be shown on the screen like this.
 
 The components have features like this:
 - Each box represents each LED on Sense Hat (each box can be pressed to be chosen).
-- The sliders can change boxes selected.
+- The sliders can change the color of boxes selected.
 - All and None buttons can be used to pick all or none of the boxes.
 - The red button can be used to send the configuration to the backend. 
 
