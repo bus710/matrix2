@@ -1,6 +1,6 @@
 # matrix2
 
-A toy project to drive Sense Hat's LED matrix by using Go/JS.
+A toy project to drive Sense Hat's LED matrix by using Go and Flutter 
 
 <img src="assets/b.png" width="300">
 
