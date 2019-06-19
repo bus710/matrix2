@@ -1,5 +1,5 @@
 # Start from go-1.12.5
-FROM arm64v8/golang:1.12.5
+FROM arm64v8/golang:1.12.6-alpine3.9
 
 # Prep
 RUN apt update
