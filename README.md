@@ -1,4 +1,7 @@
-# matrix2
+# matrix2  
+
+<a href="https://stackoverflow.com/questions/tagged/flutter?sort=votes">
+   <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" /> </a>
 
 A toy project to drive Sense Hat's LED matrix by using Go and Flutter 
 
