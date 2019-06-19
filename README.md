@@ -4,9 +4,9 @@
 
 <img src="assets/b.png" width="300">
 
-<br/>
-
 A toy project to drive Sense Hat's LED matrix by using Go and Flutter 
+
+<br/> <br/>
 
 ## 1. Description
 
