@@ -81,7 +81,13 @@ The components have features like this:
 - All and None buttons can be used to pick all or none of the boxes.
 - The red button can be used to send the configuration to the backend. 
 
-## 4. Conclusion
+## 4. Clean up
+
+Things should work properly but before closing, the images and containers should be cleaned up with these commands:
+- docker rm -f $(docker ps -qa)
+- docker rmi $(docker images -q)
+
+## 5. Conclusion
 
 With this simple project, the LEDs on Sense Hat can be easily controlled by the front-end and there is no such procedure to install any comlex development tools. However, anyone interests to use Flutter, Golang, or the I2C of RPI may check the source code in the repository to add more feature. 
 
