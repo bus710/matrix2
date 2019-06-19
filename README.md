@@ -66,7 +66,7 @@ Please follow the below commands and access to **localhost:3000** from a web bro
 
 ```
 git clone https://github.com/bus710/matrix2
-cd matrix2/src/docker
+cd matrix2/src/docker # or docker_for_arm64v8 for Ubuntu ARM64 on RPI
 docker build -t matrix2 .
 docker run -p 3000:3000 --device /dev/i2c-1 -it --rm --name matrix2i matrix2
 ```
