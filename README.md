@@ -13,6 +13,7 @@ This project consists of 2 parts:
 ## 2. Prerequisites
 
 First of all, the user should be familiar with Raspberry Pi and its terminal interface.
+Unfortunately, **RPI 3B+** should be used for this project because of the memory size.
 
 ### 2.1. I2C interface activation
 
