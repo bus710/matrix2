@@ -16,9 +16,10 @@ This project consists of 2 parts:
 
 ## 2. Prerequisites
 
-First of all, the user should be familiar with Raspberry Pi and its terminal interface.
-Unfortunately, **RPI 3B+** should be used for this project because of the memory size.
-
+First of all, the user should be familiar with Raspberry Pi and its terminal interface.  
+  
+Hardware-wise, **RPI 3B+** is recommendable because it works regardless of the OS (either Raspbian or Ubuntu 18.04 32/64 bit). However, **RPI 3A+** only works when it has Raspbian 32 bit.  
+  
 ### 2.1. I2C interface activation
 
 Enable i2c communication by using raspi-config.
