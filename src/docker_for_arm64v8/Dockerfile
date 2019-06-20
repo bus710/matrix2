@@ -3,6 +3,7 @@ FROM arm64v8/golang:1.12.6-alpine3.9
 
 # Prep
 RUN apk update
+RUN apk add build-base
 RUN apk add git
 
 # Get the repo
