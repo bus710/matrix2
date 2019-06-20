@@ -52,7 +52,7 @@ sudo systemctl start docker
 
 ### 2.3. User permission for Docker
 
-To give the permission to user docker command, the current username should be added to the docker group in the file.
+To give the permission of the **docker** command to a user, the current username should be added to the docker group in the file.
 
 ```
 sudo vi /etc/group
