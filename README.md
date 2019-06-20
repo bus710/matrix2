@@ -1,6 +1,6 @@
 # matrix2 
 
-<a href="https://stackoverflow.com/questions/tagged/flutter?sort=votes"> <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" /> </a>
+<a href="https://stackoverflow.com/questions/tagged/flutter?sort=votes"> <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" /> </a> [(>> Visit Awesome-Flutter)](https://github.com/Solido/awesome-flutter)
 
 <img src="assets/b.png" width="300">
 
