@@ -81,8 +81,9 @@ docker build -t matrix2 .
 docker run -p 3000:3000 --device /dev/i2c-1 -it --rm --name matrix2i matrix2
 ```
 
-From the browser, the frontend can be shown on the screen like this.  
-
+From the browser, the frontend can be shown on the screen like this.    
+(Access to the RPI's IP and port 3000).  
+  
 <img src="assets/a.png" width="200">
 
 The components have features like this:
