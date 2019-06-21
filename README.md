@@ -1,6 +1,8 @@
 # matrix2 
 
-<a href="https://stackoverflow.com/questions/tagged/flutter?sort=votes"> <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" /> </a> [(>> Visit Awesome-Flutter)](https://github.com/Solido/awesome-flutter)
+<a href="https://stackoverflow.com/questions/tagged/flutter?sort=votes"> <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" /> </a> 
+
+<a href="https://github.com/Solido/awesome-flutter"> <img alt="Awesome Flutter" src="https://user-images.githubusercontent.com/1295961/45949308-cbb2f680-bffb-11e8-8054-28c35ed6d132.png" width="100"/> </a> 
 
 <img src="assets/b.png" width="300">
 
