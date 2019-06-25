@@ -96,6 +96,13 @@ The components have features like this:
 
 Things should work properly but before closing, the images and containers should be cleaned up with these commands:
 ```
+docker container prune
+docker image prune
+```
+
+If all the docker objects should be cleaned, below commands would be helpful (but be careful!)
+
+```
 docker rm -f $(docker ps -qa)
 docker rmi $(docker images -q)
 ```
