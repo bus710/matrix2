@@ -7,6 +7,8 @@
 
 A toy project to drive Sense Hat's LED matrix by using Go and Flutter 
 
+<br/>
+
 ### RPI4 warning
 
 RPI4 and matrix hat have some issues during boot. To avoid:
