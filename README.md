@@ -7,6 +7,12 @@
 
 A toy project to drive Sense Hat's LED matrix by using Go and Flutter 
 
+### RPI4 warning
+
+RPI4 and matrix hat have some issues during boot. To avoid:
+- For Raspbian OS, add **hdmi_force_hotplug=1** to /boot/config.txt
+- For Ubuntu, add **hdmi_force_hotplug=1** to /boot/firmware/config.txt
+
 <br/> <br/>
 
 ## 1. Description
