@@ -119,9 +119,7 @@ docker rmi $(docker images -q)
 
 With this simple project, the LEDs on Sense Hat can be easily controlled by the front-end and there is no such procedure to install any comlex development tools. However, anyone interests to use Flutter, Golang, or the I2C of RPI may check the source code in the repository to add more feature. 
 
-## Writer
 
-- SJ Kim - <bus710@gmail.com>
 
 
 ----
